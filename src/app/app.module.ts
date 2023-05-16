@@ -10,6 +10,7 @@ import { ChangePassComponent } from './pages/change-pass/change-pass.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
     ProductsComponent,
     ProductDetailComponent,
     SideNavComponent,
+    HeaderComponent,
   ],
   imports: [BrowserModule],
   providers: [],
