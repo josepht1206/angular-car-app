@@ -9,21 +9,25 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  isLogin = false;
   loginForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private auth: AuthService
+    private authService: AuthService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
+    if (this.authService.getIsLoggedIn() === true) {
+      this.router.navigate(['/']);
+    }
   }
 
   onSubmit() {
-    this.auth.login();
+    this.authService.login();
     this.router.navigate(['/']);
   }
 
