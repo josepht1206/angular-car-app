@@ -1,1 +1,7 @@
-<p>home works!</p>
+<app-iframe></app-iframe>
+
+<app-popup
+  *ngIf="showPopup"
+  [message]="popupMessage"
+  (closePopup)="hidePopup()"
+></app-popup>
