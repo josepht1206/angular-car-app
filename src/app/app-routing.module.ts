@@ -13,10 +13,10 @@ import { ChangePassComponent } from './pages/change-pass/change-pass.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgetPassComponent },
-  { path: 'dashboard', component: DasboardComponent },
+  { path: 'dashboard', component: DasboardComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent },
   { path: 'change-pass', component: ChangePassComponent },
   { path: 'products', component: ProductsComponent },

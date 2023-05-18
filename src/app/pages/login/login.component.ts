@@ -9,7 +9,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  isLogin = false;
   loginForm: FormGroup;
 
   constructor(
@@ -22,13 +21,13 @@ export class LoginComponent {
       password: ['', [Validators.required]],
     });
     if (this.authService.getIsLoggedIn() === true) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/dashboard']);
     }
   }
 
   onSubmit() {
     this.authService.login();
-    this.router.navigate(['/']);
+    this.router.navigate(['/dashboard']);
   }
 
   forgotPassword() {

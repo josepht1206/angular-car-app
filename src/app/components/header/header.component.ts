@@ -12,7 +12,6 @@ export class HeaderComponent {
 
   onLogout() {
     this.authService.logout();
-    this.router.navigate(['/']);
-    console.log('logout console', this.authService.getIsLoggedIn());
+    this.router.navigate(['/login']);
   }
 }
