@@ -25,6 +25,7 @@ export class AppComponent {
       '/profile',
       '/change-pass',
       '/products',
+      '/invalid-product',
     ];
 
     // Check if the current route is in the allowed routes list

@@ -19,6 +19,8 @@ import { IframeComponent } from './components/iframe/iframe.component';
 import { PopupComponent } from './components/popup/popup.component';
 import { TimeclockComponent } from './components/timeclock/timeclock.component';
 import { DasboardComponent } from './pages/dasboard/dasboard.component';
+import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
+import { InvalidProductComponent } from './pages/invalid-product/invalid-product.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { DasboardComponent } from './pages/dasboard/dasboard.component';
     PopupComponent,
     TimeclockComponent,
     DasboardComponent,
+    UnauthorizedComponent,
+    InvalidProductComponent,
   ],
   imports: [
     AppRoutingModule,
