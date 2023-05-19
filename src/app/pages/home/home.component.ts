@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   showPopup: boolean = true;
-  popupMessage: string = 'This is a google search Iframe';
+  popupMessage: string =
+    'This is a google search Iframe, please login to see more about the cars';
 
   hidePopup() {
     this.showPopup = false;

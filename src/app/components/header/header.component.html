@@ -13,11 +13,20 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a *ngIf="isLoggedIn" class="nav-item nav-link active" href="/">Home</a>
-      <a class="nav-item nav-link active" href="/dashboard">Dashboard</a>
-      <a class="nav-item nav-link active" href="/login">Login</a>
-      <a class="nav-item nav-link active" href="/login" (click)="onLogout()"
+      <a *ngIf="isLoggedIn" class="nav-item nav-link active" href="/dashboard"
+        >Dashboard</a
+      >
+      <a *ngIf="!isLoggedIn" class="nav-item nav-link active" href="/login"
+        >Login</a
+      >
+      <a
+        *ngIf="isLoggedIn"
+        class="nav-item nav-link active"
+        href="/"
+        (click)="onLogout()"
         >Logout</a
       >
+      <div *ngIf="loggedInUser">Welcome, {{ loggedInUser }}!</div>
       <app-timeclock></app-timeclock>
     </div>
   </div>

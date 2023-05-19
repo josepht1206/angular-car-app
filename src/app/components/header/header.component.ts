@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -10,20 +9,22 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private cdr: ChangeDetectorRef
-  ) {}
+  loggedInUser: string | null | undefined;
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.isLoggedIn = this.authService.getIsLoggedIn();
-    console.log(this.isLoggedIn);
+    this.authService.isLoggedIn$.subscribe((loggedIn) => {
+      this.isLoggedIn = loggedIn;
+    });
+
+    this.authService.user$.subscribe((user) => {
+      this.loggedInUser = user;
+    });
   }
 
   onLogout() {
     this.authService.logout();
     this.router.navigate(['/login']);
-    this.cdr.detectChanges();
   }
 }
