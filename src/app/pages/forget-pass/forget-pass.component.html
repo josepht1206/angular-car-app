@@ -1,7 +1,16 @@
-<h1>Forgot Password</h1>
+<form [formGroup]="forgetPassForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="usernameEmail">Username/Email</label>
+    <input
+      type="text"
+      class="form-control"
+      id="usernameEmail"
+      formControlName="usernameEmail"
+    />
+  </div>
 
-<form>
-  <label>Email:</label>
-  <input type="email" />
-  <button type="submit">Reset Password</button>
+  <button type="button" class="btn btn-secondary" (click)="goBack()">
+    Back to Login
+  </button>
+  <button type="submit" class="btn btn-primary">Reset Password</button>
 </form>

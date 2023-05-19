@@ -19,8 +19,18 @@ export class HeaderComponent implements OnInit {
     });
 
     this.authService.user$.subscribe((user) => {
-      this.loggedInUser = user;
+      this.loggedInUser = this.getUsernameWithoutDomain(user);
     });
+  }
+
+  getUsernameWithoutDomain(email: string | null): string {
+    if (email) {
+      const atIndex = email.indexOf('@');
+      if (atIndex !== -1) {
+        return email.substring(0, atIndex);
+      }
+    }
+    return '';
   }
 
   onLogout() {
