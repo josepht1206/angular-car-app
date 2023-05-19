@@ -10,7 +10,7 @@ export class TimeclockComponent {
 
   constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     setInterval(() => {
       this.time = new Date();
     }, 1000);

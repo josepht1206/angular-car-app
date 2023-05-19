@@ -21,6 +21,7 @@ import { TimeclockComponent } from './components/timeclock/timeclock.component';
 import { DasboardComponent } from './pages/dasboard/dasboard.component';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
 import { InvalidProductComponent } from './pages/invalid-product/invalid-product.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { InvalidProductComponent } from './pages/invalid-product/invalid-product
     DasboardComponent,
     UnauthorizedComponent,
     InvalidProductComponent,
+    RegisterComponent,
   ],
   imports: [
     AppRoutingModule,

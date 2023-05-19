@@ -7,10 +7,21 @@
       id="usernameEmail"
       formControlName="usernameEmail"
     />
+    <div
+      *ngIf="forgetPassForm.get('usernameEmail')?.errors?.['required'] && (forgetPassForm.get('usernameEmail')?.dirty || forgetPassForm.get('usernameEmail')?.touched)"
+    >
+      Email is required.
+    </div>
   </div>
 
   <button type="button" class="btn btn-secondary" (click)="goBack()">
     Back to Login
   </button>
-  <button type="submit" class="btn btn-primary">Reset Password</button>
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="forgetPassForm.invalid"
+  >
+    Reset Password
+  </button>
 </form>

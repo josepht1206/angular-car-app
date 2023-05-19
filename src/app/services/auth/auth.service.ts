@@ -18,6 +18,7 @@ export class AuthService {
     // Set the initial login state based on the stored value
     this.loggedIn.next(storedLoginState === 'true');
 
+    // Store the username
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       this.user.next(storedUser);
@@ -29,6 +30,7 @@ export class AuthService {
     this.loggedIn.next(true);
     localStorage.setItem('isLoggedIn', 'true');
 
+    // After successful login, update the username and store it in localStorage
     this.user.next(username);
     localStorage.setItem('user', username);
   }
@@ -38,6 +40,7 @@ export class AuthService {
     this.loggedIn.next(false);
     localStorage.removeItem('isLoggedIn');
 
+    // After successful login, remove the username and store it in localStorage
     this.user.next(null);
     localStorage.removeItem('user');
   }

@@ -14,6 +14,7 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
 import { ProductDetailGuard } from './guard/product-detail-guard/product-detail-guard.guard';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
 import { InvalidProductComponent } from './pages/invalid-product/invalid-product.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'change-pass', component: ChangePassComponent },
   { path: 'products', component: ProductsComponent },
+  { path: 'register', component: RegisterComponent },
   {
     path: 'product-detail/:id',
     component: ProductDetailComponent,

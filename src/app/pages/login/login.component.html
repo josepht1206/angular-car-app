@@ -1,4 +1,4 @@
-<h1>Login</h1>
+<h2>Login</h2>
 
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <label>Email:</label>
@@ -26,5 +26,8 @@
 </form>
 
 <div>
-  <button (click)="forgotPassword()">Forgot Password?</button>
+  <button class="btn btn-primary" (click)="forgotPassword()">
+    Forgot Password?
+  </button>
+  <button class="btn btn-primary" (click)="register()">Register</button>
 </div>

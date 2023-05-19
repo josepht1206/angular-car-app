@@ -7,6 +7,11 @@
       id="currentPass"
       formControlName="currentPass"
     />
+    <div
+      *ngIf="changePassForm.get('currentPass')?.errors?.['required'] && (changePassForm.get('currentPass')?.dirty || changePassForm.get('currentPass')?.touched)"
+    >
+      Current Password is required.
+    </div>
   </div>
 
   <div class="form-group">
@@ -17,6 +22,11 @@
       id="newPass"
       formControlName="newPass"
     />
+    <div
+      *ngIf="changePassForm.get('newPass')?.errors?.['required'] && (changePassForm.get('newPass')?.dirty || changePassForm.get('newPass')?.touched)"
+    >
+      New Password is required.
+    </div>
   </div>
 
   <div class="form-group">
@@ -27,7 +37,29 @@
       id="confirmNewPass"
       formControlName="confirmNewPass"
     />
+    <div
+      *ngIf="changePassForm.get('confirmNewPass')?.errors?.['required'] && (changePassForm.get('confirmNewPass')?.dirty || changePassForm.get('confirmNewPass')?.touched)"
+    >
+      Confirm New Password is required.
+    </div>
+  </div>
+  <div
+    *ngIf="
+      changePassForm.hasError('passwordMismatch') && changePassForm.touched
+    "
+    class="error-message"
+  >
+    Passwords do not match.
+  </div>
+  <div
+    *ngIf="
+      changePassForm.get('newPass')?.hasError('minlength') &&
+      changePassForm.get('newPass')?.touched
+    "
+    class="error-message"
+  >
+    Password must be at least 6 characters long.
   </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" [disabled]="changePassForm.invalid">Submit</button>
 </form>

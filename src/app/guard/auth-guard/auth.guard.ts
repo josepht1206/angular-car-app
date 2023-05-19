@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(): boolean {
+  canActivate() {
     if (!this.authService.getIsLoggedIn()) {
       this.router.navigate(['/unauthorized']);
       return false;

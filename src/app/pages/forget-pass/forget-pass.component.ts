@@ -12,24 +12,17 @@ export class ForgetPassComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private router: Router) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.forgetPassForm = this.formBuilder.group({
       usernameEmail: ['', [Validators.required, Validators.email]],
     });
   }
 
-  onSubmit(): void {
-    // Logic to handle form submission and reset password
-    const usernameEmail = this.forgetPassForm.value.usernameEmail;
-
-    // Perform any necessary actions (e.g., send a reset password email)
-
-    // Redirect to the change-pass screen
+  onSubmit() {
     this.router.navigate(['/change-pass']);
   }
 
-  goBack(): void {
-    // Redirect to the login screen
+  goBack() {
     this.router.navigate(['/login']);
   }
 }

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,28 +17,30 @@ export class ChangePassComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private router: Router) {}
 
-  ngOnInit(): void {
-    this.changePassForm = this.formBuilder.group({
-      currentPass: ['', Validators.required],
-      newPass: ['', Validators.required],
-      confirmNewPass: ['', Validators.required],
-    });
+  ngOnInit() {
+    this.changePassForm = this.formBuilder.group(
+      {
+        currentPass: ['', Validators.required],
+        newPass: ['', [Validators.required, Validators.minLength(6)]],
+        confirmNewPass: ['', Validators.required],
+      },
+      { validators: this.passwordMatchValidator }
+    );
   }
 
-  onSubmit(): void {
-    // Logic to handle form submission and change password
-    const currentPass = this.changePassForm.value.currentPass;
-    const newPass = this.changePassForm.value.newPass;
-    const confirmNewPass = this.changePassForm.value.confirmNewPass;
+  passwordMatchValidator(
+    control: AbstractControl
+  ): { [key: string]: boolean } | null {
+    const newPass = control.get('newPass');
+    const confirmNewPass = control.get('confirmNewPass');
 
-    // Perform validation and change password logic
-    if (newPass === confirmNewPass) {
-      // Passwords match, perform the change password action
-
-      // Redirect to a success page or relevant screen
-      this.router.navigate(['/change-pass-success']);
-    } else {
-      // Passwords don't match, show an error message or perform relevant action
+    if (newPass?.value !== confirmNewPass?.value) {
+      return { passwordMismatch: true };
     }
+    return null;
+  }
+
+  onSubmit() {
+    console.log('New Password : ', this.changePassForm.value.newPass);
   }
 }
