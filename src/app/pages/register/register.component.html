@@ -1,5 +1,11 @@
 <h2>Register</h2>
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+<div *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="alert alert-danger" *ngIf="error">
+  <p>{{ error }}</p>
+</div>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
   <div>
     <label>Email</label>
     <input type="email" formControlName="email" />

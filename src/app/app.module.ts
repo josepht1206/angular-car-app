@@ -23,6 +23,7 @@ import { DasboardComponent } from './pages/dasboard/dasboard.component';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
 import { InvalidProductComponent } from './pages/invalid-product/invalid-product.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { RegisterComponent } from './pages/register/register.component';
     UnauthorizedComponent,
     InvalidProductComponent,
     RegisterComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     AppRoutingModule,

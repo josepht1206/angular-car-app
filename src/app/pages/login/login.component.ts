@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  isLoading = false;
+  error = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,11 +28,29 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.authService.login(
-      this.loginForm.value.email,
-      this.loginForm.value.password
+    if (!this.loginForm.valid) {
+      return;
+    }
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
+
+    this.isLoading = true;
+
+    this.authService.signin(email, password).subscribe(
+      (resData) => {
+        console.log(resData);
+        this.isLoading = false;
+        this.authService.saveUsername(email, password);
+        this.router.navigate(['/dashboard']);
+      },
+      (error) => {
+        console.log(error);
+        this.error = 'An error occureed!';
+        this.isLoading = false;
+      }
     );
-    this.router.navigate(['/dashboard']);
+
+    this.loginForm.reset();
   }
 
   forgotPassword() {

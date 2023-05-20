@@ -8,6 +8,7 @@ interface AuthResponseData {
   refreshToken: string; //A Firebase Auth refresh token for the newly created user.
   expiresIn: string; //The number of seconds in which the ID token expires.
   localId: string; //The uid of the newly created user.
+  registerd?: boolean; //Whether the email is for an existing account.
 }
 
 @Injectable({
@@ -34,7 +35,7 @@ export class AuthService {
     }
   }
 
-  login(username: string, password: string) {
+  saveUsername(username: string, password: string) {
     // After successful login, update the login state and store it in localStorage
     this.loggedIn.next(true);
     localStorage.setItem('isLoggedIn', 'true');
@@ -61,6 +62,17 @@ export class AuthService {
   signup(email: string, password: string) {
     return this.http.post<AuthResponseData>(
       'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAXxi0ToWAHLHr1sRxHEboRiZK-GF5s_Ys',
+      {
+        email: email,
+        password: password,
+        returnSecureToken: true,
+      }
+    );
+  }
+
+  signin(email: string, password: string) {
+    return this.http.post<AuthResponseData>(
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAXxi0ToWAHLHr1sRxHEboRiZK-GF5s_Ys',
       {
         email: email,
         password: password,

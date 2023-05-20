@@ -3,9 +3,9 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  NgForm,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -15,10 +15,13 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
+  isLoading = false;
+  error: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,12 +42,18 @@ export class RegisterComponent implements OnInit {
     const email = this.registerForm.value.email;
     const password = this.registerForm.value.password;
 
+    this.isLoading = true;
+
     this.authService.signup(email, password).subscribe(
       (resData) => {
         console.log(resData);
+        this.isLoading = false;
+        this.router.navigate(['/login']);
       },
       (error) => {
         console.log(error);
+        this.error = 'An error occureed!';
+        this.isLoading = false;
       }
     );
 
