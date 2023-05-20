@@ -2,15 +2,14 @@
   <button
     class="navbar-toggler"
     type="button"
-    data-toggle="collapse"
-    data-target="#navbarNavAltMarkup"
+    (click)="isNavCollapsed = !isNavCollapsed"
+    [attr.aria-expanded]="!isNavCollapsed"
     aria-controls="navbarNavAltMarkup"
-    aria-expanded="false"
     aria-label="Toggle navigation"
   >
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+  <div [ngbCollapse]="isNavCollapsed" class="collapse navbar-collapse">
     <div class="navbar-nav">
       <a *ngIf="isLoggedIn" class="nav-item nav-link active" href="/">Home</a>
       <a *ngIf="isLoggedIn" class="nav-item nav-link active" href="/dashboard"

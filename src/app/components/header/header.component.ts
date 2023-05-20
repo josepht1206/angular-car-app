@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class HeaderComponent implements OnInit {
   isLoggedIn = false;
   loggedInUser: string | null | undefined;
+  isNavCollapsed = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 

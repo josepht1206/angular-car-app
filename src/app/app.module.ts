@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -49,6 +50,7 @@ import { RegisterComponent } from './pages/register/register.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbCollapseModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
