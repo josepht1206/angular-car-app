@@ -3,8 +3,10 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
+  NgForm,
   Validators,
 } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +16,10 @@ import {
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group(
@@ -27,9 +32,23 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  onSubmit(): void {
-    console.log('Registered email : ', this.registerForm.value.email);
-    console.log('Registered password : ', this.registerForm.value.password);
+  onSubmit() {
+    if (!this.registerForm.valid) {
+      return;
+    }
+    const email = this.registerForm.value.email;
+    const password = this.registerForm.value.password;
+
+    this.authService.signup(email, password).subscribe(
+      (resData) => {
+        console.log(resData);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.registerForm.reset();
   }
 
   passwordMatchValidator(
