@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <form [formGroup]="changePassForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="resetPassForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="newPass">New Password</label>
       <input
@@ -10,7 +10,7 @@
       />
       <div
         class="invalid-feedback"
-        *ngIf="changePassForm.get('newPass')?.errors?.['required'] && (changePassForm.get('newPass')?.dirty || changePassForm.get('newPass')?.touched)"
+        *ngIf="resetPassForm.get('newPass')?.errors?.['required'] && (resetPassForm.get('newPass')?.dirty || resetPassForm.get('newPass')?.touched)"
       >
         New Password is required.
       </div>
@@ -26,7 +26,7 @@
       />
       <div
         class="invalid-feedback"
-        *ngIf="changePassForm.get('confirmNewPass')?.errors?.['required'] && (changePassForm.get('confirmNewPass')?.dirty || changePassForm.get('confirmNewPass')?.touched)"
+        *ngIf="resetPassForm.get('confirmNewPass')?.errors?.['required'] && (resetPassForm.get('confirmNewPass')?.dirty || resetPassForm.get('confirmNewPass')?.touched)"
       >
         Confirm New Password is required.
       </div>
@@ -34,7 +34,7 @@
     <div
       class="error-message"
       *ngIf="
-        changePassForm.hasError('passwordMismatch') && changePassForm.touched
+        resetPassForm.hasError('passwordMismatch') && resetPassForm.touched
       "
     >
       Passwords do not match.
@@ -42,8 +42,8 @@
     <div
       class="error-message"
       *ngIf="
-        changePassForm.get('newPass')?.hasError('minlength') &&
-        changePassForm.get('newPass')?.touched
+        resetPassForm.get('newPass')?.hasError('minlength') &&
+        resetPassForm.get('newPass')?.touched
       "
     >
       Password must be at least 6 characters long.
@@ -52,7 +52,7 @@
     <button
       type="submit"
       class="btn btn-primary"
-      [disabled]="changePassForm.invalid"
+      [disabled]="resetPassForm.invalid"
     >
       Submit
     </button>

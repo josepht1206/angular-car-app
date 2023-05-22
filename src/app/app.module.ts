@@ -25,6 +25,7 @@ import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.compone
 import { InvalidProductComponent } from './pages/invalid-product/invalid-product.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     InvalidProductComponent,
     RegisterComponent,
     LoadingSpinnerComponent,
+    ResetPassComponent,
   ],
   imports: [
     AppRoutingModule,

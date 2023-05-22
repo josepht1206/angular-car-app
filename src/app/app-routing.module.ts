@@ -15,6 +15,7 @@ import { ProductDetailGuard } from './guard/product-detail-guard/product-detail-
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
 import { InvalidProductComponent } from './pages/invalid-product/invalid-product.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,7 +23,11 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgetPassComponent },
   { path: 'dashboard', component: DasboardComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'change-pass', component: ChangePassComponent },
+  {
+    path: 'change-pass',
+    component: ChangePassComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   {
@@ -32,6 +37,7 @@ const routes: Routes = [
   },
   { path: 'unauthorized', component: UnauthorizedComponent },
   { path: 'invalid-product', component: InvalidProductComponent },
+  { path: 'reset-pass', component: ResetPassComponent },
 ];
 
 @NgModule({

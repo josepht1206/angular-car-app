@@ -40,7 +40,7 @@ export class ForgetPassComponent implements OnInit {
     this.authService.resetPassword(email).subscribe(
       () => {
         this.isLoading = false;
-        this.router.navigate(['/change-pass']);
+        this.router.navigate(['/reset-pass']);
       },
       (error) => {
         this.isLoading = false;

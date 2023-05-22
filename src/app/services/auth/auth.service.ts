@@ -112,7 +112,7 @@ export class AuthService {
     );
   }
 
-  changePassword(email: string, currentPassword: string, newPassword: string) {
+  changePassword(newPassword: string) {
     const idToken = localStorage.getItem('idToken');
 
     if (!idToken) {

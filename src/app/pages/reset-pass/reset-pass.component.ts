@@ -9,12 +9,12 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
-  selector: 'app-change-pass',
-  templateUrl: './change-pass.component.html',
-  styleUrls: ['./change-pass.component.css'],
+  selector: 'app-reset-pass',
+  templateUrl: './reset-pass.component.html',
+  styleUrls: ['./reset-pass.component.css'],
 })
-export class ChangePassComponent implements OnInit {
-  changePassForm!: FormGroup;
+export class ResetPassComponent implements OnInit {
+  resetPassForm!: FormGroup;
   isLoading = false;
   isError = false;
   errorMessage = '';
@@ -28,7 +28,7 @@ export class ChangePassComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.changePassForm = this.formBuilder.group(
+    this.resetPassForm = this.formBuilder.group(
       {
         newPass: ['', [Validators.required, Validators.minLength(6)]],
         confirmNewPass: ['', Validators.required],
@@ -50,7 +50,7 @@ export class ChangePassComponent implements OnInit {
   }
 
   onSubmit() {
-    const newPass = this.changePassForm.value.newPass;
+    const newPass = this.resetPassForm.value.newPass;
 
     this.authService.changePassword(newPass).subscribe(
       () => {
@@ -66,7 +66,7 @@ export class ChangePassComponent implements OnInit {
         } else {
           this.isError = true;
           this.errorMessage =
-            'You have changed the password recently, please try again later';
+            'You have reset the password recently, please try again later';
         }
       }
     );
