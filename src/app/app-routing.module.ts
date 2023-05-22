@@ -21,9 +21,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgetPassComponent },
   { path: 'dashboard', component: DasboardComponent, canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'change-pass', component: ChangePassComponent },
-  { path: 'products', component: ProductsComponent },
+  { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   {
     path: 'product-detail/:id',
