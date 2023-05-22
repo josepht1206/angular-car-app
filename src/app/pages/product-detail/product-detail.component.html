@@ -16,7 +16,21 @@
         style="max-width: 200px"
       />
     </div>
-    <p class="card-text">Variance: {{ product.variance }}</p>
-    <p class="card-text">Price: {{ product.price }}</p>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Variance</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let variance of product.variances">
+            <td>{{ variance.info }}</td>
+            <td>{{ variance.price }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

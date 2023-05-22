@@ -1,12 +1,13 @@
 <h2 class="mb-4">Car List</h2>
 
-<table class="table table-hover">
+<table class="table">
   <thead>
     <tr>
       <th>ID</th>
       <th>Name</th>
       <th>Description</th>
       <th>Image</th>
+      <th>Price</th>
     </tr>
   </thead>
   <tbody>
@@ -14,18 +15,21 @@
       *ngFor="let product of products"
       (click)="goToProductDetail(product)"
       style="cursor: pointer"
+      class="table-row-highlight"
     >
       <td>{{ product.id }}</td>
       <td>{{ product.name }}</td>
-      <td>{{ product.description }}</td>
+      <td class="line-clamp-3">{{ product.description }}</td>
       <td>
         <img
           [src]="product.imagePath"
           alt="{{ product.name }}"
           class="img-fluid"
-          style="max-height: 100px"
+          width="50"
+          height="50"
         />
       </td>
+      <td>{{ product.price }}</td>
     </tr>
   </tbody>
 </table>
