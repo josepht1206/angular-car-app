@@ -3,7 +3,20 @@
 <div *ngIf="product" class="card">
   <div class="card-body">
     <h3 class="card-title">{{ product.name }}</h3>
-    <p class="card-text">Brand: {{ product.brand }}</p>
+    <p class="card-text">ID: {{ product.id }}</p>
+    <p class="card-text">Description: {{ product.description }}</p>
+    <div>
+      <p class="card-text">
+        <strong>Image:</strong>
+      </p>
+      <img
+        [src]="product.imagePath"
+        alt="{{ product.name }}"
+        class="img-fluid"
+        style="max-width: 200px"
+      />
+    </div>
+    <p class="card-text">Variance: {{ product.variance }}</p>
     <p class="card-text">Price: {{ product.price }}</p>
   </div>
 </div>

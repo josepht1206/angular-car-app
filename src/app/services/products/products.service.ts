@@ -6,8 +6,24 @@ import { Product } from 'src/app/models/product.model';
 })
 export class ProductsService {
   private products: Product[] = [
-    { id: 1, name: 'Car 1', brand: 'Brand 1', price: 10000 },
-    { id: 2, name: 'Car 2', brand: 'Brand 2', price: 20000 },
+    {
+      id: 1,
+      name: 'Product 1',
+      description: 'Description 1',
+      imagePath:
+        'https://www.hdwallpaper.nu/wp-content/uploads/2015/02/url1.jpg',
+      variance: 'Info 1',
+      price: 10,
+    },
+    {
+      id: 2,
+      name: 'Product 2',
+      description: 'Description 2',
+      imagePath:
+        'https://1.bp.blogspot.com/_ltoEMuaSQ-I/TDy6npUcP6I/AAAAAAAAAAs/UEaE8Yk9tt4/s1600/car6.jpg',
+      variance: 'Info 2',
+      price: 20,
+    },
   ];
 
   getProducts(): Product[] {

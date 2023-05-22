@@ -1,13 +1,31 @@
 <h2 class="mb-4">Car List</h2>
 
-<ul class="list-group">
-  <div *ngFor="let product of products">
-    <li
-      class="list-group-item"
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let product of products"
       (click)="goToProductDetail(product)"
       style="cursor: pointer"
     >
-      {{ product.name }}
-    </li>
-  </div>
-</ul>
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.description }}</td>
+      <td>
+        <img
+          [src]="product.imagePath"
+          alt="{{ product.name }}"
+          class="img-fluid"
+          style="max-height: 100px"
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>
