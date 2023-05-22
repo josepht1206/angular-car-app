@@ -34,10 +34,21 @@ export class AppComponent implements OnDestroy {
       '/products',
       '/invalid-product',
       '/change-pass',
-      'product-detail/:id',
+      '/product-detail/*',
     ];
 
-    // Check if the current route is in the allowed routes list
-    return allowedRoutes.includes(url);
+    for (const route of allowedRoutes) {
+      if (this.isRouteMatch(url, route)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  private isRouteMatch(url: string, route: string): boolean {
+    // Replace the wildcard (*) with a regular expression pattern
+    const pattern = new RegExp('^' + route.replace('*', '.+') + '$');
+    return pattern.test(url);
   }
 }

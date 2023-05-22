@@ -1,11 +1,24 @@
-<ul class="nav flex-column">
+<ul class="nav flex-column bg-light">
   <li class="nav-item">
-    <a class="nav-link" href="/profile">Profile</a>
+    <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active">
+      <i class="bi bi-person-fill"></i>
+      Profile
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/change-pass">Change Password</a>
+    <a
+      class="nav-link"
+      [routerLink]="['/change-pass']"
+      routerLinkActive="active"
+    >
+      <i class="bi bi-key-fill"></i>
+      Change Password
+    </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/products">Products</a>
+    <a class="nav-link" [routerLink]="['/products']" routerLinkActive="active">
+      <i class="bi bi-box-seam"></i>
+      Products
+    </a>
   </li>
 </ul>

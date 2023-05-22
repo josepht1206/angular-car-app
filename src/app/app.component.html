@@ -1,4 +1,12 @@
-<app-header></app-header>
-<xng-breadcrumb></xng-breadcrumb>
-<app-side-nav *ngIf="showSideNav"></app-side-nav>
-<router-outlet></router-outlet>
+<div class="container">
+  <div class="row">
+    <app-header class="mb-4"></app-header>
+    <div class="col-md-3">
+      <xng-breadcrumb></xng-breadcrumb>
+      <app-side-nav *ngIf="showSideNav"></app-side-nav>
+    </div>
+    <div [class.col-md-9]="showSideNav" [class.col-md-12]="!showSideNav">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

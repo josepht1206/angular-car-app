@@ -10,23 +10,31 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div [ngbCollapse]="isNavCollapsed" class="collapse navbar-collapse">
-    <div class="navbar-nav">
-      <a *ngIf="isLoggedIn" class="nav-item nav-link active" href="/">Home</a>
-      <a *ngIf="isLoggedIn" class="nav-item nav-link active" href="/dashboard"
-        >Dashboard</a
-      >
-      <a *ngIf="!isLoggedIn" class="nav-item nav-link active" href="/login"
-        >Login</a
-      >
-      <a
-        *ngIf="isLoggedIn"
-        class="nav-item nav-link active"
-        href="/"
-        (click)="onLogout()"
-        >Logout</a
-      >
-      <div *ngIf="loggedInUser">Welcome, {{ loggedInUser }}!</div>
-      <app-timeclock></app-timeclock>
+    <ul class="navbar-nav me-auto">
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a class="nav-link" routerLink="/dashboard" routerLinkActive="active"
+          >Dashboard</a
+        >
+      </li>
+    </ul>
+    <div class="d-flex align-items-center ms-auto me-3">
+      <div *ngIf="loggedInUser" class="navbar-text me-3">
+        Welcome, {{ loggedInUser }}!
+      </div>
+      <app-timeclock class="me-3"></app-timeclock>
+      <div class="nav-item">
+        <a
+          *ngIf="isLoggedIn"
+          class="nav-link"
+          routerLink="/login"
+          (click)="onLogout()"
+          >Logout</a
+        >
+        <a *ngIf="!isLoggedIn" class="nav-link" routerLink="/login">Login</a>
+      </div>
     </div>
   </div>
 </nav>
