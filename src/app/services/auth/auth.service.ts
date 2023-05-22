@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 interface AuthResponseData {
   idToken: string; //A Firebase Auth ID token for the newly created user.
@@ -82,11 +82,27 @@ export class AuthService {
   }
 
   resetPassword(email: string) {
-    return this.http.post<any>(
+    return this.http.post<AuthResponseData>(
       'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyAXxi0ToWAHLHr1sRxHEboRiZK-GF5s_Ys',
       {
         requestType: 'PASSWORD_RESET',
         email: email,
+      }
+    );
+  }
+
+  changePassword(newPassword: string) {
+    // Retrieve the stored idToken from local storage
+    const idToken = localStorage.getItem('idToken');
+    console.log(idToken);
+
+    // Make the request to change the password using the idToken
+    return this.http.post<any>(
+      'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAXxi0ToWAHLHr1sRxHEboRiZK-GF5s_Ys',
+      {
+        idToken: idToken,
+        password: newPassword,
+        returnSecureToken: true,
       }
     );
   }

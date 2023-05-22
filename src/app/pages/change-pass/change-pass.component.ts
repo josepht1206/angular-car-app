@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-change-pass',
@@ -14,8 +15,17 @@ import { Router } from '@angular/router';
 })
 export class ChangePassComponent implements OnInit {
   changePassForm!: FormGroup;
+  isLoading = false;
+  isError = false;
+  errorMessage = '';
+  isSuccess = false;
+  successMessage = '';
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.changePassForm = this.formBuilder.group(
@@ -42,5 +52,27 @@ export class ChangePassComponent implements OnInit {
 
   onSubmit() {
     console.log('New Password : ', this.changePassForm.value.newPass);
+
+    this.authService
+      .changePassword(this.changePassForm.value.newPass)
+      .subscribe(
+        () => {
+          this.isLoading = false;
+          this.isSuccess = true;
+          this.successMessage = 'New password saved';
+        },
+        (error) => {
+          this.isLoading = false;
+          if (error.error?.error?.message === 'INVALID_ID_TOKEN') {
+            this.isError = true;
+            this.errorMessage = 'Invalid token. Please try again.';
+          } else {
+            this.isError = true;
+            this.errorMessage =
+              error.error?.error?.message ||
+              'An error occurred. Please try again.';
+          }
+        }
+      );
   }
 }
