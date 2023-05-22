@@ -51,28 +51,27 @@ export class ChangePassComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('New Password : ', this.changePassForm.value.newPass);
+    const email = this.changePassForm.value.email;
+    const currentPass = this.changePassForm.value.currentPass;
+    const newPass = this.changePassForm.value.newPass;
 
-    this.authService
-      .changePassword(this.changePassForm.value.newPass)
-      .subscribe(
-        () => {
-          this.isLoading = false;
-          this.isSuccess = true;
-          this.successMessage = 'New password saved';
-        },
-        (error) => {
-          this.isLoading = false;
-          if (error.error?.error?.message === 'INVALID_ID_TOKEN') {
-            this.isError = true;
-            this.errorMessage = 'Invalid token. Please try again.';
-          } else {
-            this.isError = true;
-            this.errorMessage =
-              error.error?.error?.message ||
-              'An error occurred. Please try again.';
-          }
+    this.authService.changePassword(email, currentPass, newPass).subscribe(
+      () => {
+        this.isLoading = false;
+        this.isSuccess = true;
+        this.successMessage = 'New password saved';
+      },
+      (error) => {
+        this.isLoading = false;
+        if (error.error?.error?.message === 'INVALID_ID_TOKEN') {
+          this.isError = true;
+          this.errorMessage = 'Invalid token. Please try again.';
+        } else {
+          this.isError = true;
+          this.errorMessage =
+            'You have changed the password recently, please try again later';
         }
-      );
+      }
+    );
   }
 }

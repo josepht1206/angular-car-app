@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 
 interface AuthResponseData {
   idToken: string; //A Firebase Auth ID token for the newly created user.
@@ -15,6 +15,7 @@ interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthService {
+  API_KEY = 'AIzaSyAXxi0ToWAHLHr1sRxHEboRiZK-GF5s_Ys';
   private loggedIn = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.loggedIn.asObservable();
 
@@ -58,27 +59,47 @@ export class AuthService {
   getIsLoggedIn(): boolean {
     return localStorage.getItem('isLoggedIn') === 'true';
   }
+  private handleAuthentication(responseData: AuthResponseData) {
+    const expirationDate = new Date(
+      new Date().getTime() + +responseData.expiresIn * 1000
+    );
+    localStorage.setItem('idToken', responseData.idToken);
+    localStorage.setItem('expiresIn', expirationDate.toString());
+    // ... your existing code to handle login state and user storage
+  }
 
   signup(email: string, password: string) {
-    return this.http.post<AuthResponseData>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAXxi0ToWAHLHr1sRxHEboRiZK-GF5s_Ys',
-      {
-        email: email,
-        password: password,
-        returnSecureToken: true,
-      }
-    );
+    return this.http
+      .post<AuthResponseData>(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAXxi0ToWAHLHr1sRxHEboRiZK-GF5s_Ys',
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }
+      )
+      .pipe(
+        tap((responseData: AuthResponseData) => {
+          this.handleAuthentication(responseData);
+        })
+      );
   }
 
   signin(email: string, password: string) {
-    return this.http.post<AuthResponseData>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAXxi0ToWAHLHr1sRxHEboRiZK-GF5s_Ys',
-      {
-        email: email,
-        password: password,
-        returnSecureToken: true,
-      }
-    );
+    return this.http
+      .post<AuthResponseData>(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAXxi0ToWAHLHr1sRxHEboRiZK-GF5s_Ys',
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }
+      )
+      .pipe(
+        tap((responseData: AuthResponseData) => {
+          this.handleAuthentication(responseData);
+        })
+      );
   }
 
   resetPassword(email: string) {
@@ -91,14 +112,15 @@ export class AuthService {
     );
   }
 
-  changePassword(newPassword: string) {
-    // Retrieve the stored idToken from local storage
+  changePassword(email: string, currentPassword: string, newPassword: string) {
     const idToken = localStorage.getItem('idToken');
-    console.log(idToken);
 
-    // Make the request to change the password using the idToken
+    if (!idToken) {
+      return throwError('User is not authenticated.');
+    }
+
     return this.http.post<any>(
-      'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAXxi0ToWAHLHr1sRxHEboRiZK-GF5s_Ys',
+      `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${this.API_KEY}`,
       {
         idToken: idToken,
         password: newPassword,
