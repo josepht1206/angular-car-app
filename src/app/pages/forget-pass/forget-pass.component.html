@@ -1,18 +1,32 @@
 <div class="container mt-4">
   <form [formGroup]="forgetPassForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="usernameEmail">Username/Email</label>
+      <label for="email">Email</label>
       <input
         type="text"
         class="form-control"
-        id="usernameEmail"
-        formControlName="usernameEmail"
+        id="email"
+        formControlName="email"
       />
       <div
         class="invalid-feedback"
-        *ngIf="forgetPassForm.get('usernameEmail')?.errors?.['required'] && (forgetPassForm.get('usernameEmail')?.dirty || forgetPassForm.get('usernameEmail')?.touched)"
+        *ngIf="forgetPassForm.get('email')?.errors?.['required'] && (forgetPassForm.get('email')?.dirty || forgetPassForm.get('email')?.touched)"
       >
         Email is required.
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="forgetPassForm.get('email')?.errors?.['email'] && (forgetPassForm.get('email')?.dirty || forgetPassForm.get('email')?.touched)"
+      >
+        Please enter a valid email address.
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="
+          isError && errorMessage === 'Invalid email address. Please try again.'
+        "
+      >
+        {{ errorMessage }}
       </div>
     </div>
     <br />
@@ -23,9 +37,15 @@
     <button
       type="submit"
       class="btn btn-primary"
-      [disabled]="forgetPassForm.invalid"
+      [disabled]="forgetPassForm.invalid || isLoading"
     >
       Reset Password
     </button>
+    <div *ngIf="isError" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="isLoading" class="mt-3">
+      <app-loading-spinner class="mt-3" />
+    </div>
   </form>
 </div>

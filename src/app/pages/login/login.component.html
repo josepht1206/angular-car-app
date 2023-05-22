@@ -1,9 +1,9 @@
 <div class="container mt-4">
   <div *ngIf="isLoading">
-    <app-loading-spinner></app-loading-spinner>
+    <app-loading-spinner class="mt-3" />
   </div>
-  <div class="alert alert-danger" *ngIf="error">
-    <p>{{ error }}</p>
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
   </div>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
     <div class="mb-3">

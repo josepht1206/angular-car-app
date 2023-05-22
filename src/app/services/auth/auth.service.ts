@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 interface AuthResponseData {
   idToken: string; //A Firebase Auth ID token for the newly created user.
@@ -77,6 +77,16 @@ export class AuthService {
         email: email,
         password: password,
         returnSecureToken: true,
+      }
+    );
+  }
+
+  resetPassword(email: string) {
+    return this.http.post<any>(
+      'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyAXxi0ToWAHLHr1sRxHEboRiZK-GF5s_Ys',
+      {
+        requestType: 'PASSWORD_RESET',
+        email: email,
       }
     );
   }

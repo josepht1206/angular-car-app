@@ -11,7 +11,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class LoginComponent {
   loginForm: FormGroup;
   isLoading = false;
-  error = '';
+  isError = false;
+  errorMessage = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,9 +45,20 @@ export class LoginComponent {
         this.router.navigate(['/dashboard']);
       },
       (error) => {
-        console.log(error);
-        this.error = 'An error occureed!';
         this.isLoading = false;
+        if (error.error?.error?.message === 'EMAIL_NOT_FOUND') {
+          this.isError = true;
+          this.errorMessage = 'Invalid email address. Please try again.';
+        }
+        if (error.error?.error?.message === 'INVALID_PASSWORD') {
+          this.isError = true;
+          this.errorMessage = 'Invalid password. Please try again.';
+        } else {
+          this.isError = true;
+          this.errorMessage =
+            error.error?.error?.message ||
+            'An error occurred. Please try again.';
+        }
       }
     );
 
