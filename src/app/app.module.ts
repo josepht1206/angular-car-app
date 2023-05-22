@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { BreadcrumbModule } from 'xng-breadcrumb';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -53,6 +54,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
     FormsModule,
     ReactiveFormsModule,
     NgbCollapseModule,
+    BreadcrumbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
