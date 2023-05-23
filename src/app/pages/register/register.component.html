@@ -75,6 +75,9 @@
     <div *ngIf="isSuccess" class="alert alert-success mt-3">
       {{ successMessage }}
     </div>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      <p>{{ errorMessage }}</p>
+    </div>
     <br />
     <button
       type="submit"

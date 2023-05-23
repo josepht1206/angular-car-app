@@ -19,6 +19,8 @@ export class RegisterComponent implements OnInit {
   error: string = '';
   isSuccess = false;
   successMessage = '';
+  isError = false;
+  errorMessage = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,9 +57,17 @@ export class RegisterComponent implements OnInit {
         // this.router.navigate(['/login']);
       },
       (error) => {
-        console.log(error);
-        this.error = 'An error occureed!';
         this.isLoading = false;
+        if (error.error?.error?.message === 'EMAIL_EXISTS') {
+          this.isError = true;
+          this.errorMessage =
+            'Email already exist. Please try with another email.';
+        } else {
+          this.isError = true;
+          this.errorMessage =
+            error.error?.error?.message ||
+            'An error occurred. Please try again.';
+        }
       }
     );
 
