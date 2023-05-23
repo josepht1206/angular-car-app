@@ -10,7 +10,7 @@ There might be some conflicts for the versioning and dependencies. Therefore, he
 2. npm install --force (you might need to include --force to install the dependencies)
 3. ng serve -- open (to run and open the app in the browser)
 
-NOTE: YOU MIGHT NEED TO INSTALL A LATER VERSION OF NVM IN ORDER TO RUN THE APP
+NOTE: You might need to install the later version of NVM to run the app
 
 FOR YOUR REFERENCE (VERSIONING):
 
