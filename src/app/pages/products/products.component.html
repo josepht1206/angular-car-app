@@ -1,35 +1,25 @@
-<h2 class="mb-4">Car List</h2>
+<div class="container">
+  <h2 class="mb-4">Car List</h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Image</th>
-      <th>Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-      *ngFor="let product of products"
-      (click)="goToProductDetail(product)"
-      style="cursor: pointer"
-      class="table-row-highlight"
-    >
-      <td>{{ product.id }}</td>
-      <td>{{ product.name }}</td>
-      <td class="line-clamp-3">{{ product.description }}</td>
-      <td>
+  <div class="row">
+    <div *ngFor="let product of products" class="col-md-4 mb-4">
+      <div class="card h-100">
         <img
           [src]="product.imagePath"
           alt="{{ product.name }}"
-          class="img-fluid"
-          width="50"
-          height="50"
+          class="card-img-top"
+          style="height: 200px; object-fit: cover"
         />
-      </td>
-      <td>{{ product.price | number }}</td>
-    </tr>
-  </tbody>
-</table>
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text line-clamp-3">{{ product.description }}</p>
+          <p class="card-text">ID: {{ product.id }}</p>
+          <p class="card-text">Price: {{ product.price | number }}</p>
+          <button class="btn btn-primary" (click)="goToProductDetail(product)">
+            View Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

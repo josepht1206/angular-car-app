@@ -19,6 +19,6 @@ export class ProductsComponent {
   }
 
   goToProductDetail(product: Product): void {
-    this.router.navigate(['/product-detail', product.name]);
+    this.router.navigate(['/product-detail', product.id]);
   }
 }

@@ -1,36 +1,42 @@
-<h2 class="mb-4">Car Detail</h2>
+<div class="container">
+  <h2 class="mb-4">Car Detail</h2>
 
-<div *ngIf="product" class="card">
-  <div class="card-body">
-    <h3 class="card-title">{{ product.name }}</h3>
-    <p class="card-text">ID: {{ product.id }}</p>
-    <p class="card-text">Description: {{ product.description }}</p>
-    <div>
-      <p class="card-text">
-        <strong>Image:</strong>
-      </p>
-      <img
-        [src]="product.imagePath"
-        alt="{{ product.name }}"
-        class="img-fluid"
-        style="max-width: 200px"
-      />
-    </div>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Variance</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let variance of product.variances">
-            <td>{{ variance.info }}</td>
-            <td>{{ variance.price | number }}</td>
-          </tr>
-        </tbody>
-      </table>
+  <div *ngIf="product" class="card shadow">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <h3 class="card-title">{{ product.name }}</h3>
+          <p class="card-text">ID: {{ product.id }}</p>
+          <p class="card-text">Description: {{ product.description }}</p>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <img
+              [src]="product.imagePath"
+              alt="{{ product.name }}"
+              class="img-fluid"
+              style="max-width: 350px; height: 350px"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive mt-4">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Variation</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let variance of product.variances">
+              <td>{{ variance.info }}</td>
+              <td>{{ variance.price | number }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

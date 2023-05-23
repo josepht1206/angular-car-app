@@ -12,11 +12,12 @@ export class ProductsService {
     return this.products;
   }
 
-  getProductByName(productName: any) {
-    return this.products.find((car) => car.name === productName);
+  getProductById(id: number): Product | undefined {
+    return this.products.find((car) => car.id === id);
   }
 
-  isValidProduct(productName: any): boolean {
-    return this.products.some((product) => product.name === productName);
+  isValidProduct(productId: any): boolean {
+    const id = parseInt(productId, 10);
+    return this.products.some((product) => product.id === id);
   }
 }
