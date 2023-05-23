@@ -20,6 +20,7 @@ export class ProductsComponent {
     this.productsService.getProducts().subscribe(
       (response) => {
         this.products = Object.values(response);
+        console.log('Retrieved Product List', this.products);
       },
       (error) => {
         console.error('Error fetching products:', error);

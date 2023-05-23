@@ -62,7 +62,7 @@ const routes: Routes = [
   },
   {
     path: 'product-detail/:id',
-    data: { breadcrumb: 'Product Detail' },
+    data: { breadcrumb: ' ' },
     component: ProductDetailComponent,
     canActivate: [ProductDetailGuard],
   },
