@@ -20,9 +20,9 @@ export class ProductDetailGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    const productId = route.paramMap.get('id');
+    const productName = route.paramMap.get('name'); // Assuming the parameter name is 'name' instead of 'id'
 
-    if (this.productService.isValidProduct(productId)) {
+    if (this.productService.isValidProduct(productName)) {
       return true; // Allow access to the product detail page
     } else {
       this.router.navigate(['/invalid-product']); // Redirect to invalid-product page

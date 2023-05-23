@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
   {
-    path: 'product-detail/:id',
+    path: 'product-detail/:name',
     component: ProductDetailComponent,
     canActivate: [ProductDetailGuard],
   },
