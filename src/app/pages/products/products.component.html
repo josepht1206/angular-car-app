@@ -14,7 +14,9 @@
           <h5 class="card-title">{{ product.name }}</h5>
           <p class="card-text line-clamp-3">{{ product.description }}</p>
           <p class="card-text">ID: {{ product.id }}</p>
-          <p class="card-text">Price: {{ product.price | number }}</p>
+          <p class="card-text">
+            Price: RM {{ product.variances.v1.price | number }}
+          </p>
           <button class="btn btn-primary" (click)="goToProductDetail(product)">
             View Details
           </button>

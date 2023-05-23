@@ -5,6 +5,7 @@ import {
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
+import { Observable, map, of } from 'rxjs';
 import { ProductsService } from 'src/app/services/products/products.service';
 
 @Injectable({
@@ -19,14 +20,22 @@ export class ProductDetailGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): boolean {
-    const productId = route.paramMap.get('id'); // Assuming the parameter name is 'name' instead of 'id'
+  ): Observable<boolean> {
+    const productId = route.paramMap.get('id');
 
-    if (this.productService.isValidProduct(productId)) {
-      return true; // Allow access to the product detail page
-    } else {
-      this.router.navigate(['/invalid-product']); // Redirect to invalid-product page
-      return false;
+    if (productId === null) {
+      this.router.navigate(['/invalid-product']); // Redirect to the invalid product screen
+      return of(false);
     }
+
+    return this.productService.getProduct(productId).pipe(
+      map((product) => {
+        const productExists = !!product;
+        if (!productExists) {
+          this.router.navigate(['/invalid-product']); // Redirect to the invalid product screen
+        }
+        return productExists;
+      })
+    );
   }
 }

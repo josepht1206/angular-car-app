@@ -30,9 +30,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let variance of product.variances">
+            <tr *ngFor="let variance of getVariances()">
               <td>{{ variance.info }}</td>
-              <td>{{ variance.price | number }}</td>
+              <td>RM {{ variance.price | number }}</td>
             </tr>
           </tbody>
         </table>

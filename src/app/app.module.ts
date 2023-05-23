@@ -26,6 +26,7 @@ import { InvalidProductComponent } from './pages/invalid-product/invalid-product
 import { RegisterComponent } from './pages/register/register.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
     RegisterComponent,
     LoadingSpinnerComponent,
     ResetPassComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     AppRoutingModule,

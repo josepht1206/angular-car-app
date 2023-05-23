@@ -16,28 +16,77 @@ import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.compone
 import { InvalidProductComponent } from './pages/invalid-product/invalid-product.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ResetPassComponent } from './pages/reset-pass/reset-pass.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'forgot-password', component: ForgetPassComponent },
-  { path: 'dashboard', component: DasboardComponent, canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
+  {
+    path: 'login',
+    data: { breadcrumb: 'Login' },
+    component: LoginComponent,
+  },
+
+  {
+    path: 'forgot-password',
+    data: { breadcrumb: 'Forgot Password' },
+    component: ForgetPassComponent,
+  },
+  {
+    path: 'dashboard',
+    data: { breadcrumb: 'Dashboard' },
+    component: DasboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'profile',
+    data: { breadcrumb: 'My Profile' },
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'change-pass',
+    data: { breadcrumb: 'Change Password' },
     component: ChangePassComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
-  { path: 'register', component: RegisterComponent },
   {
-    path: 'product-detail/:name',
+    path: 'products',
+    data: { breadcrumb: 'Products' },
+    component: ProductsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'register',
+    data: { breadcrumb: 'Register' },
+    component: RegisterComponent,
+  },
+  {
+    path: 'product-detail/:id',
+    data: { breadcrumb: 'Product Detail' },
     component: ProductDetailComponent,
     canActivate: [ProductDetailGuard],
   },
-  { path: 'unauthorized', component: UnauthorizedComponent },
-  { path: 'invalid-product', component: InvalidProductComponent },
-  { path: 'reset-pass', component: ResetPassComponent },
+  {
+    path: 'unauthorized',
+    data: { breadcrumb: 'Unauthorized' },
+    component: UnauthorizedComponent,
+  },
+  {
+    path: 'invalid-product',
+    data: { breadcrumb: 'Invalid Product' },
+    component: InvalidProductComponent,
+  },
+  {
+    path: 'reset-pass',
+    data: { breadcrumb: 'Reset Password' },
+    component: ResetPassComponent,
+  },
+  {
+    path: 'not-found',
+    data: { breadcrumb: 'Page Not Found' },
+    component: PageNotFoundComponent,
+  },
+  { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({

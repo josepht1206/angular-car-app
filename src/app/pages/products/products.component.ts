@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
@@ -9,16 +8,26 @@ import { ProductsService } from 'src/app/services/products/products.service';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent {
-  products: Product[];
+  products: any[] = [];
 
   constructor(
     private productsService: ProductsService,
     private router: Router
   ) {
-    this.products = this.productsService.getProducts();
+    this.getProducts();
+  }
+  getProducts(): void {
+    this.productsService.getProducts().subscribe(
+      (response) => {
+        this.products = Object.values(response);
+      },
+      (error) => {
+        console.error('Error fetching products:', error);
+      }
+    );
   }
 
-  goToProductDetail(product: Product): void {
+  goToProductDetail(product: any): void {
     this.router.navigate(['/product-detail', product.id]);
   }
 }

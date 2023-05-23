@@ -17,7 +17,25 @@ export class ProductDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const carId = Number(this.route.snapshot.paramMap.get('id'));
-    this.product = this.productsService.getProductById(carId);
+    this.getProduct();
+  }
+
+  getVariances(): any[] {
+    if (this.product && this.product.variances) {
+      return Object.values(this.product.variances);
+    }
+    return [];
+  }
+
+  getProduct(): void {
+    const productId = this.route.snapshot.paramMap.get('id');
+    this.productsService.getProduct(productId!).subscribe(
+      (response) => {
+        this.product = response;
+      },
+      (error) => {
+        console.error('Error fetching product:', error);
+      }
+    );
   }
 }

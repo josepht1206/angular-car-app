@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 import { PRODUCTS } from './product.mock';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  private products: Product[] = PRODUCTS;
+  private apiUrl =
+    'https://car-app-c49d8-default-rtdb.asia-southeast1.firebasedatabase.app';
 
-  getProducts(): Product[] {
-    return this.products;
+  constructor(private http: HttpClient) {}
+
+  getProducts(): Observable<any> {
+    return this.http.get<Product>(`${this.apiUrl}/products.json`);
   }
 
-  getProductById(id: number): Product | undefined {
-    return this.products.find((car) => car.id === id);
-  }
+  private products: Product[] = [];
 
-  isValidProduct(productId: any): boolean {
-    const id = parseInt(productId, 10);
-    return this.products.some((product) => product.id === id);
+  getProduct(productId: string): Observable<any> {
+    const url = `${this.apiUrl}/products/p${productId}.json`;
+    return this.http.get<Product>(url);
   }
 }
