@@ -72,6 +72,9 @@
     >
       Password must be at least 6 characters long.
     </div>
+    <div *ngIf="isSuccess" class="alert alert-success mt-3">
+      {{ successMessage }}
+    </div>
     <br />
     <button
       type="submit"
@@ -79,6 +82,10 @@
       [disabled]="registerForm.invalid"
     >
       Register
+    </button>
+    <a> | </a>
+    <button type="button" class="btn btn-secondary" (click)="goBack()">
+      Back to Login
     </button>
   </form>
 </div>

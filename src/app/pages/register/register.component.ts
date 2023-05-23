@@ -17,6 +17,8 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   isLoading = false;
   error: string = '';
+  isSuccess = false;
+  successMessage = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,7 +50,9 @@ export class RegisterComponent implements OnInit {
       (resData) => {
         console.log(resData);
         this.isLoading = false;
-        this.router.navigate(['/login']);
+        this.isSuccess = true;
+        this.successMessage = 'You have successfully registered an account!';
+        // this.router.navigate(['/login']);
       },
       (error) => {
         console.log(error);
@@ -60,6 +64,9 @@ export class RegisterComponent implements OnInit {
     this.registerForm.reset();
   }
 
+  goBack() {
+    this.router.navigate(['/login']);
+  }
   passwordMatchValidator(
     control: AbstractControl
   ): { [key: string]: boolean } | null {
